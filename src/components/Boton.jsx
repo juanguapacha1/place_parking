@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function Boton({ text }) {
+function Boton({ text, onClick }) {
     return (
         <StyledWrapper>
-            <button>
-                <span> {text}
-                </span>
+            <button onClick={onClick}> {/* Aquí pasamos el evento onClick */}
+                <span>{text}</span>
             </button>
         </StyledWrapper>
     );
@@ -19,12 +18,13 @@ const StyledWrapper = styled.div`
    width: 120px;
    height: 30px;
    border-radius: 10px;
-   border: 1px solidrgb(121, 121, 121);
+   border: 1px solid rgb(121, 121, 121);
    position: relative;
    overflow: hidden;
    transition: all 0.5s ease-in;
    z-index: 1;
    margin-top: 20px;
+   color: black;
   }
 
   button::before,
@@ -38,16 +38,18 @@ const StyledWrapper = styled.div`
    transition: all 0.5s;
    overflow: hidden;
    z-index: -1;
+   color: black;
+
   }
 
   button::before {
    left: -10px;
-   background: #AF6543;
+   background: linear-gradient(45deg, #19758C 0%, #19758C 100%);
   }
 
   button::after {
    right: -10px;
-   background: #AF6543;
+   background: linear-gradient(45deg, #19758C 0%, #19758C 100%);
   }
 
   button:hover::before,
@@ -61,9 +63,11 @@ const StyledWrapper = styled.div`
   }
 
   button span {
-   color: wihte;
+   color:rgba(0, 0, 0, 0.65);
    font-size: 18px;
    transition: all 0.3s ease-in;
-  }`;
+   font-weight: bold;
+  }
+`;
 
 export default Boton;

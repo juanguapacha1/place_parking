@@ -1,14 +1,8 @@
-function DatosVH() {
-    const datosVehiculo = [
-        {
-            placa: 'ABC123',
-            tipo: 'Carro',
-            horaEntrada: '10:00 AM',
-        }
-    ];
+import React from "react"
 
+function DatosVH({datosVehiculo}) {
     return (
-        <>
+        <div>
             <h1>Datos del vehículo</h1>
             <table>
                 <thead>
@@ -23,12 +17,12 @@ function DatosVH() {
                         <tr key={index}>
                             <td>{vehiculo.placa}</td>
                             <td>{vehiculo.tipo}</td>
-                            <td>{vehiculo.horaEntrada}</td>
+                            <td>{new Date(vehiculo.horaEntrada).toLocaleTimeString()}</td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-        </>
+        </div>
     );
 }
 

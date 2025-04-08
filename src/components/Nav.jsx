@@ -1,4 +1,4 @@
-import logo from '../assets/logo.png'
+import logo from '../assets/logo.jpg'
 function Nav() {
     return (
         <nav className="barra-navegacion">
