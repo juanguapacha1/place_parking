@@ -2,22 +2,56 @@ import React from 'react';
 import styled from 'styled-components';
 import Boton from '../components/Boton';
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { alertaError, alertaRedireccion, generarToken } from '../helpers/funciones';
+let urlUsuarios = "https://back-json-fkj4.onrender.com"
 
 const Login = () => {
-    const navigate = useNavigate();
+    const [getName, setName] = useState("")
+    const [getPassword, setPassword] = useState("")
+    const [usuarios, setUsuarios] = useState([])
+    let redireccion = useNavigate()
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-        navigate('/home'); // Redirige al PanelControl
-    };
+    function getUsuarios(){
+      fetch(urlUsuarios).then(response => response.json())
+      .then(data => setUsuarios(data))
+      .catch(error => console.log(error))
+    }
+  
+    useEffect(() => {
+      getUsuarios()
+      
+    },[])
+  
+    
+    console.log(usuarios);
+    
+  
+    function buscarUsuario() {
+      let auth = usuarios.find((item) => item.usuario === getName && item.contrasena == getPassword)
+      localStorage.setItem("usuario", auth.nombre)
+      console.log(auth);
+      return auth
+    }
+  
+    function iniciarSesion() {
+      if (buscarUsuario()) {
+        localStorage.setItem("token", generarToken())
+        alertaRedireccion(redireccion, "/home", "Bienvenido a la aplicacion")
+      } else {
+        alertaError("Error de credenciales")
+      }
+    }
+      
+    
     return (
         <StyledWrapper>
             <div className="container">
                 <div className="heading">Sign In</div>
-                <form action className="form" onSubmit={handleLogin}>
-                    <input required className="input" type="email" name="email" id="email" placeholder="E-mail" />
-                    <input required className="input" type="password" name="password" id="password" placeholder="Password" />
-                    <Boton text="Sign In" />
+                <form action className="form" /* onSubmit={iniciarSesion} */>
+                    <input onChange={(e) => setName(e.target.value)} required className="input"  id="email" placeholder="E-mail" />
+                    <input onChange={(e) => setPassword(e.target.value)} required className="input" type="password"  id="password" placeholder="Password" />
+                    <Boton type="button" onClick={iniciarSesion} text="Sign In" />
                 </form>
                 
                 <span className="agreement"><a href="#">Learn user licence agreement</a></span>

@@ -1,4 +1,5 @@
-import Login from '../pages/login.jsx';
+import RutaProtegida from '../components/RutaProtegida.jsx';
+import Login from '../pages/Login.jsx';
 import PanelControl from '../PanelControl.jsx';
 
 export let enrutador = [
@@ -8,6 +9,6 @@ export let enrutador = [
     },
     {
         path: '/home',
-        element: <PanelControl />,
+        element: <RutaProtegida proteger={ PanelControl }/>,
     }
 ]
