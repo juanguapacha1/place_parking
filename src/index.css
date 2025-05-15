@@ -16,12 +16,33 @@ body{
 }
 
 .barra-navegacion {
-  background-color: #19758C;
+
   height: 13vh;
   width: 100%;
   display: flex;
   align-items: center;
 }
+
+.nav{
+  display: flex;
+  background-color: #19758C;
+  flex-direction: row;
+}
+.boton{
+  margin-right: 50px;
+  margin-top: 10px;
+}
+.boton a{
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #19758C;
+  transition: background-color 0.3s ease;
+} 
+
 
 img { 
   max-width: 70%; 
@@ -211,4 +232,5 @@ img {
     width: 90%; /* Los cuadros ocupan casi todo el ancho */
   }
 }
+
 

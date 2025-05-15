@@ -1,4 +1,6 @@
-import Swal from "sweetalert2";
+// src/helpers/funciones.js
+import Swal from "sweetalert2"; // Lo mantenemos para alertaError
+
 export function alertaConfirmacion() {
     Swal.fire({
         title: "Correcto!",
@@ -6,6 +8,7 @@ export function alertaConfirmacion() {
         icon: "success"
     });
 }
+
 export function alertaError(mensaje) {
     Swal.fire({
         title: "Error!",
@@ -13,27 +16,32 @@ export function alertaError(mensaje) {
         icon: "error"
     });
 }
-export function alertaRedireccion(redireccion, path, mensaje) {
-    let timerInterval;
+
+// MODIFICADA: Hacemos la redirección más directa
+export function alertaRedireccion(navigateFunction, path, mensaje) {
+    // Primero, muestra la alerta (opcional, puedes quitarla si interfiere)
+    // Para depuración, podemos usar un alert simple por ahora.
+    alert(mensaje); // O usar Swal pero sin su lógica de timer para la redirección
+
+    // Luego, ejecuta la navegación inmediatamente.
+    navigateFunction(path);
+
+    // Si quieres usar Swal de forma más controlada para esto:
+    /*
     Swal.fire({
         title: mensaje,
-        html: "I will close in <b></b> milliseconds.",
-        timer: 2000,
         icon: "success",
-        didOpen: () => {
-            Swal.showLoading();
-            const timer = Swal.getPopup().querySelector("b");
-            timerInterval = setInterval(() => {
-                timer.textContent = `${Swal.getTimerLeft()}`;
-            }, 100);
-        },
-        willClose: () => {
-            clearInterval(timerInterval);
-            redireccion(path)
-        }
-    })
+        timer: 1500, // Un timer corto
+        showConfirmButton: false
+    }).then(() => {
+        // La navegación ocurre DESPUÉS de que la alerta se cierra.
+        // Esto es generalmente más seguro si hay operaciones que deben completarse antes.
+        navigateFunction(path);
+    });
+    */
 }
 
 export function generarToken() {
-    return Math.random().toString(36).substring(2, 10) + "-" + Math.random().toString(36).substring(2, 10)
+    // Tu función de generar token está bien
+    return Math.random().toString(36).substring(2, 10) + "-" + Math.random().toString(36).substring(2, 10);
 }

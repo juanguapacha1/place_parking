@@ -64,7 +64,6 @@ const StyledWrapper = styled.div`
 
   button span {
    color:rgba(0, 0, 0, 0.65);
-   font-size: 18px;
    transition: all 0.3s ease-in;
    font-weight: bold;
   }
